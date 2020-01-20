@@ -8,13 +8,13 @@ import (
 
 // Deployment abstraction
 type Deployment struct {
-	Obj k8sapps.Deployment
+	Obj *k8sapps.Deployment
 }
 
 // NewDeployment creates new Deployment object
 func NewDeployment(name, namespace string, replicas *int32, labels map[string]string) Deployment {
 	return Deployment{
-		Obj: k8sapps.Deployment{
+		Obj: &k8sapps.Deployment{
 			TypeMeta: metav1.TypeMeta{APIVersion: k8sapps.SchemeGroupVersion.String(), Kind: "Deployment"},
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      name,
@@ -39,10 +39,10 @@ func NewDeployment(name, namespace string, replicas *int32, labels map[string]st
 
 // AddContainer extends Deployment pod with a Container
 func (d Deployment) AddContainer(c Container) {
-	d.Obj.Spec.Template.Spec.Containers = append(d.Obj.Spec.Template.Spec.Containers, c.Obj)
+	d.Obj.Spec.Template.Spec.Containers = append(d.Obj.Spec.Template.Spec.Containers, *c.Obj)
 }
 
 // AddVolume extends Deployment pod with a Volume
 func (d Deployment) AddVolume(v Volume) {
-	d.Obj.Spec.Template.Spec.Volumes = append(d.Obj.Spec.Template.Spec.Volumes, v.Obj)
+	d.Obj.Spec.Template.Spec.Volumes = append(d.Obj.Spec.Template.Spec.Volumes, *v.Obj)
 }

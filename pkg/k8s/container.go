@@ -6,13 +6,13 @@ import (
 
 // Container abstraction
 type Container struct {
-	Obj corev1.Container
+	Obj *corev1.Container
 }
 
 // NewContainer create new Container object
 func NewContainer(name, image string, command []string) Container {
 	return Container{
-		Obj: corev1.Container{
+		Obj: &corev1.Container{
 			Name:    name,
 			Image:   image,
 			Command: command,
