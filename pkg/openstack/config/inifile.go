@@ -6,7 +6,10 @@ import (
 )
 
 // IniFile abstraction
-type IniFile map[string]map[string]string
+type IniFile map[string]Section
+
+// Section abstraction
+type Section map[string]string
 
 // GetSection returns articular section of the config file
 func (i IniFile) GetSection(name string) (map[string]string, error) {
