@@ -24,3 +24,14 @@ func NewVolume(name, objRefName string) Volume {
 		},
 	}
 }
+
+func NewEmptyVolume(name string) Volume {
+	return Volume{
+		Obj: &corev1.Volume{
+			Name: name,
+			VolumeSource: corev1.VolumeSource{
+				EmptyDir: &corev1.EmptyDirVolumeSource{},
+			},
+		},
+	}
+}
